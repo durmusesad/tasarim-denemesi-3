@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KG Tahmin</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-kabuk">
+
+  <header class="ust-bar">
+    <div class="marka">
+      <span class="marka-kutu">KG</span>
+      <span class="marka-ad">Tahmin</span>
+    </div>
+    <button class="kupon-rozet" id="kuponRozet" type="button">
+      <span class="kupon-rozet-ikon">🎟</span>
+      <span id="kuponRozetMetin">Kupon boş</span>
+    </button>
+  </header>
+
+  <div class="serit-uyari">
+    <strong>DEMO.</strong> Tüm maç/oran/sinyal verisi üretilmiştir. Gerçek servise bağlı değildir. Kupon
+    gerçek bahis değildir, sadece kazanç hesaplayıcıdır.
+  </div>
+
+  <main id="ana-icerik">
+
+    <!-- ============ BÜLTEN ============ -->
+    <section class="sayfa aktif" id="sayfa-bulten">
+      <div class="sayfa-ust">
+        <h1>Bülten</h1>
+        <div class="segment" id="bultenSegment">
+          <button class="segment-btn aktif" data-f="hepsi">Hepsi</button>
+          <button class="segment-btn" data-f="kesin">Kesin</button>
+          <button class="segment-btn" data-f="olasi">Olası</button>
+        </div>
+      </div>
+      <div class="sayim-cubugu" id="bultenSayim"></div>
+      <div class="feed" id="bultenFeed"></div>
+    </section>
+
+    <!-- ============ CANLI ============ -->
+    <section class="sayfa" id="sayfa-canli">
+      <div class="sayfa-ust">
+        <h1>Canlı</h1>
+      </div>
+      <p class="aciklama">Etiketler kickoff öncesi donmuştur, maç boyunca değişmez. Canlı KG oranı gerçek zamanlıdır.</p>
+      <div class="feed" id="canliFeed"></div>
+    </section>
+
+    <!-- ============ ARŞİV ============ -->
+    <section class="sayfa" id="sayfa-arsiv">
+      <div class="sayfa-ust">
+        <h1>Sinyal Arşivi</h1>
+        <div class="segment" id="arsivSegment">
+          <button class="segment-btn aktif" data-a="aktif">Aktif</button>
+          <button class="segment-btn" data-a="biten">Biten (24s)</button>
+        </div>
+      </div>
+      <div class="feed" id="arsivFeed"></div>
+    </section>
+
+    <!-- ============ KUPON ============ -->
+    <section class="sayfa" id="sayfa-kupon">
+      <div class="sayfa-ust">
+        <h1>Kuponum</h1>
+        <button class="temizle-btn" id="kuponTemizleBtn" type="button">Temizle</button>
+      </div>
+      <div class="feed" id="kuponFeed"></div>
+
+      <div class="kupon-hesap-kutu">
+        <div class="kupon-hesap-satir">
+          <span>Maç Sayısı</span>
+          <strong id="kuponAdet">0</strong>
+        </div>
+        <div class="kupon-hesap-satir">
+          <span>Toplam Oran</span>
+          <strong id="kuponToplamOran">0.00</strong>
+        </div>
+        <label class="kupon-tutar-label">
+          Tutar (TL)
+          <input type="number" inputmode="decimal" id="kuponTutar" placeholder="0" min="0" step="1">
+        </label>
+        <div class="kupon-kazanc-kutu">
+          <span>Olası Kazanç</span>
+          <strong id="kuponKazanc">0,00 ₺</strong>
+        </div>
+        <p class="kupon-dipnot">* Gerçek bahis değildir, sadece kazanç simülasyonudur. Oranlar iddaa.com
+        karşılığı tahmini değere (Nesine oranı × 1.037) çevrilerek gösterilir.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="alt-nav" id="altNav">
+    <button class="alt-nav-btn aktif" data-sayfa="bulten">
+      <span class="alt-nav-ikon">▤</span><span>Bülten</span>
+    </button>
+    <button class="alt-nav-btn" data-sayfa="canli">
+      <span class="alt-nav-ikon alt-nav-canli">●</span><span>Canlı</span>
+    </button>
+    <button class="alt-nav-btn" data-sayfa="arsiv">
+      <span class="alt-nav-ikon">◈</span><span>Arşiv</span>
+    </button>
+    <button class="alt-nav-btn" data-sayfa="kupon">
+      <span class="alt-nav-ikon">🎟</span><span>Kupon</span>
+      <span class="alt-nav-sayac" id="altNavKuponSayac" hidden>0</span>
+    </button>
+  </nav>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
