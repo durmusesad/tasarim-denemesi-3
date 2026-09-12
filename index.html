@@ -3,113 +3,133 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>KG Tahmin</title>
+<title>KG Tahmin — Terminal</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="app-kabuk">
+<div class="terminal-govde">
 
-  <header class="ust-bar">
-    <div class="marka">
-      <span class="marka-kutu">KG</span>
-      <span class="marka-ad">Tahmin</span>
+  <header class="terminal-ust">
+    <div class="rivet rivet-sol-ust"></div>
+    <div class="rivet rivet-sag-ust"></div>
+    <div class="ust-sol">
+      <span class="terminal-logo">KG</span>
+      <div class="ust-basliklar">
+        <span class="terminal-ad">TAHMİN TERMİNALİ</span>
+        <span class="terminal-alt-ad" id="canliSaat">--:--:--</span>
+      </div>
     </div>
-    <button class="kupon-rozet" id="kuponRozet" type="button">
-      <span class="kupon-rozet-ikon">🎟</span>
-      <span id="kuponRozetMetin">Kupon boş</span>
+    <button class="binis-karti-mini" id="kuponMiniBtn" type="button">
+      <span class="binis-karti-mini-etiket">BİNİŞ KARTIM</span>
+      <span class="binis-karti-mini-deger" id="kuponMiniDeger">0 · 0.00x</span>
     </button>
   </header>
 
-  <div class="serit-uyari">
-    <strong>DEMO.</strong> Tüm maç/oran/sinyal verisi üretilmiştir. Gerçek servise bağlı değildir. Kupon
-    gerçek bahis değildir, sadece kazanç hesaplayıcıdır.
+  <div class="tabela-serit">
+    <span class="tabela-serit-icerik">★ DEMO YAYINI — tüm sefer/oran/sinyal verisi üretilmiştir, gerçek servise bağlı değildir ★ Kupon = gerçek bahis değildir, sadece kazanç simülasyonudur ★</span>
   </div>
+
+  <nav class="kapi-panel" id="kapiPanel">
+    <button class="kapi-btn aktif" data-bolum="bulten">
+      <span class="kapi-harf">A</span><span class="kapi-ad">TARİFE</span>
+    </button>
+    <button class="kapi-btn" data-bolum="canli">
+      <span class="kapi-harf">B</span><span class="kapi-ad">RADAR</span>
+    </button>
+    <button class="kapi-btn" data-bolum="arsiv">
+      <span class="kapi-harf">C</span><span class="kapi-ad">KAYIT DEFTERİ</span>
+    </button>
+    <button class="kapi-btn" data-bolum="kupon">
+      <span class="kapi-harf">D</span><span class="kapi-ad">BİNİŞ KARTI</span>
+    </button>
+  </nav>
 
   <main id="ana-icerik">
 
-    <!-- ============ BÜLTEN ============ -->
-    <section class="sayfa aktif" id="sayfa-bulten">
-      <div class="sayfa-ust">
-        <h1>Bülten</h1>
-        <div class="segment" id="bultenSegment">
-          <button class="segment-btn aktif" data-f="hepsi">Hepsi</button>
-          <button class="segment-btn" data-f="kesin">Kesin</button>
-          <button class="segment-btn" data-f="olasi">Olası</button>
+    <!-- ============ BÖLÜM A: TARİFE (Bülten) ============ -->
+    <section class="bolum aktif" id="bolum-bulten">
+      <div class="board-baslik">
+        <h1>KALKIŞ TARİFESİ</h1>
+        <div class="board-filtre" id="bultenFiltre">
+          <button class="filtre-btn aktif" data-f="hepsi">TÜMÜ</button>
+          <button class="filtre-btn" data-f="kesin">ONAYLANDI</button>
+          <button class="filtre-btn" data-f="olasi">BEKLEMEDE</button>
         </div>
       </div>
-      <div class="sayim-cubugu" id="bultenSayim"></div>
-      <div class="feed" id="bultenFeed"></div>
+      <div class="ozet-serit" id="bultenOzet"></div>
+
+      <div class="tarife-basliklar">
+        <span>SAAT</span><span>SEFER</span><span>KG DURUMU</span><span>KAPI</span>
+      </div>
+      <div id="bultenTarife" class="tarife-govde"></div>
     </section>
 
-    <!-- ============ CANLI ============ -->
-    <section class="sayfa" id="sayfa-canli">
-      <div class="sayfa-ust">
-        <h1>Canlı</h1>
+    <!-- ============ BÖLÜM B: RADAR (Canlı) ============ -->
+    <section class="bolum" id="bolum-canli">
+      <div class="board-baslik">
+        <h1>ŞU AN HAVADA</h1>
       </div>
-      <p class="aciklama">Etiketler kickoff öncesi donmuştur, maç boyunca değişmez. Canlı KG oranı gerçek zamanlıdır.</p>
-      <div class="feed" id="canliFeed"></div>
+      <p class="board-not">KG durumu kalkıştan (kickoff) hemen önce donmuştur, uçuş boyunca değişmez. Sinyal gücü (canlı KG oranı) gerçek zamanlıdır.</p>
+      <div id="canliRadar" class="radar-govde"></div>
     </section>
 
-    <!-- ============ ARŞİV ============ -->
-    <section class="sayfa" id="sayfa-arsiv">
-      <div class="sayfa-ust">
-        <h1>Sinyal Arşivi</h1>
-        <div class="segment" id="arsivSegment">
-          <button class="segment-btn aktif" data-a="aktif">Aktif</button>
-          <button class="segment-btn" data-a="biten">Biten (24s)</button>
+    <!-- ============ BÖLÜM C: KAYIT DEFTERİ (Arşiv) ============ -->
+    <section class="bolum" id="bolum-arsiv">
+      <div class="board-baslik">
+        <h1>SİNYAL KAYIT DEFTERİ</h1>
+        <div class="board-filtre" id="arsivFiltre">
+          <button class="filtre-btn aktif" data-a="aktif">AKTİF</button>
+          <button class="filtre-btn" data-a="biten">KAPANAN (24s)</button>
         </div>
       </div>
-      <div class="feed" id="arsivFeed"></div>
+      <div id="arsivDefter" class="defter-govde"></div>
     </section>
 
-    <!-- ============ KUPON ============ -->
-    <section class="sayfa" id="sayfa-kupon">
-      <div class="sayfa-ust">
-        <h1>Kuponum</h1>
-        <button class="temizle-btn" id="kuponTemizleBtn" type="button">Temizle</button>
+    <!-- ============ BÖLÜM D: BİNİŞ KARTI (Kupon) ============ -->
+    <section class="bolum" id="bolum-kupon">
+      <div class="board-baslik">
+        <h1>BİNİŞ KARTI</h1>
+        <button class="iptal-btn" id="kuponIptalBtn" type="button">TÜM SEFERLERİ İPTAL ET</button>
       </div>
-      <div class="feed" id="kuponFeed"></div>
+      <div id="kuponStubları" class="stub-govde"></div>
 
-      <div class="kupon-hesap-kutu">
-        <div class="kupon-hesap-satir">
-          <span>Maç Sayısı</span>
-          <strong id="kuponAdet">0</strong>
+      <div class="binis-karti-ana" id="binisKartiAna">
+        <div class="binis-delik binis-delik-sol"></div>
+        <div class="binis-delik binis-delik-sag"></div>
+        <div class="binis-yarim-daire yarim-sol"></div>
+        <div class="binis-yarim-daire yarim-sag"></div>
+
+        <div class="binis-ust-satir">
+          <span>BOARDING PASS</span><span>KG · VAR</span>
         </div>
-        <div class="kupon-hesap-satir">
-          <span>Toplam Oran</span>
-          <strong id="kuponToplamOran">0.00</strong>
+        <div class="binis-alan-satir">
+          <div><label>SEFER SAYISI</label><strong id="kuponAdet">0</strong></div>
+          <div><label>TOPLAM ORAN</label><strong id="kuponToplamOran">0.00</strong></div>
         </div>
-        <label class="kupon-tutar-label">
-          Tutar (TL)
+
+        <div class="binis-perforasyon"></div>
+
+        <label class="binis-tutar-label">TUTAR (TL)
           <input type="number" inputmode="decimal" id="kuponTutar" placeholder="0" min="0" step="1">
         </label>
-        <div class="kupon-kazanc-kutu">
-          <span>Olası Kazanç</span>
+
+        <div class="binis-kazanc-satir">
+          <label>OLASI KAZANÇ</label>
           <strong id="kuponKazanc">0,00 ₺</strong>
         </div>
-        <p class="kupon-dipnot">* Gerçek bahis değildir, sadece kazanç simülasyonudur. Oranlar iddaa.com
-        karşılığı tahmini değere (Nesine oranı × 1.037) çevrilerek gösterilir.</p>
+        <div class="binis-barkod"></div>
+        <p class="binis-dipnot">* Gerçek bahis değildir, sadece kazanç simülasyonudur. Oranlar iddaa.com karşılığı tahmini değere (Nesine oranı × 1.037) çevrilerek gösterilir.</p>
       </div>
     </section>
 
   </main>
 
-  <nav class="alt-nav" id="altNav">
-    <button class="alt-nav-btn aktif" data-sayfa="bulten">
-      <span class="alt-nav-ikon">▤</span><span>Bülten</span>
-    </button>
-    <button class="alt-nav-btn" data-sayfa="canli">
-      <span class="alt-nav-ikon alt-nav-canli">●</span><span>Canlı</span>
-    </button>
-    <button class="alt-nav-btn" data-sayfa="arsiv">
-      <span class="alt-nav-ikon">◈</span><span>Arşiv</span>
-    </button>
-    <button class="alt-nav-btn" data-sayfa="kupon">
-      <span class="alt-nav-ikon">🎟</span><span>Kupon</span>
-      <span class="alt-nav-sayac" id="altNavKuponSayac" hidden>0</span>
-    </button>
-  </nav>
+  <footer class="terminal-alt">
+    <div class="rivet rivet-sol-alt"></div>
+    <div class="rivet rivet-sag-alt"></div>
+    <span>SEFER VERİSİ ÜRETİLDİ · <span id="uretimZamani">—</span></span>
+  </footer>
 </div>
 
 <script src="app.js"></script>
