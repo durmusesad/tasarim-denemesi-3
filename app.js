@@ -5,7 +5,7 @@
    ========================================================================== */
 
 const IDDAA_KATSAYI = 1.037;
-const KUPON_ANAHTAR = "kgTahminKuponV1";
+const KUPON_ANAHTAR = "kgTahmin_tasarimDenemesi3_kuponV1";
 
 const IZINLI_TAM_LIGLER = [
   "türkiye süper ligi", "ingiltere premier lig", "ispanya la liga", "italya serie a",
